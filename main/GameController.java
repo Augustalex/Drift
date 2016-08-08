@@ -19,7 +19,7 @@ public class GameController{
     }
 
     public void render(){
-
+        this.view.render();
     }
 
     public void gameLoop(){
