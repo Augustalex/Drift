@@ -15,8 +15,9 @@ public class GameController{
     }
 
     public void update(double delta){
-
+//.
     }
+
 
     public void render(){
         this.view.render();
