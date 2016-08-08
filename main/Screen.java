@@ -22,4 +22,8 @@ public class Screen extends JPanel {
             System.out.println(((Player)Renderable.list.get(i)).getName());
         }
     }
+
+    public void render(){
+        repaint();
+    }
 }

@@ -29,6 +29,10 @@ public class View{
         window.setVisible(true);
     }
 
+    public void render(){
+        this.screen.render();
+    }
+
 }
 
 

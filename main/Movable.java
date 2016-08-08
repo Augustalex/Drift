@@ -25,52 +25,52 @@ public abstract class Movable extends Renderable {
         super(x, y, width, height);
     }
 
-    public void move(){
+    public void move(double delta){
         this.setX(this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle))));
         this.setY(this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle))));
     }
 
-    public void turn(){
-        this.angle += this.rotationMomentum;
+    public void turn(double delta){
+        this.angle += this.rotationMomentum * delta;
     }
 
-    public void accelerate(){
-        this.speed += this.acceleration;
+    public void accelerate(double delta){
+        this.speed += this.acceleration * delta;
     }
 
-    public void decelerate(){
-        this.speed -= this.deceleration;
+    public void decelerate(double delta){
+        this.speed -= this.deceleration * delta;
     }
 
-    public void turnLeft(){
-        this.angle += this.rotationSpeed;
+    public void turnLeft(double delta){
+        this.angle += this.rotationSpeed * delta;
     }
 
-    public void turnRight(){
-        this.angle -= this.rotationSpeed;
+    public void turnRight(double delta){
+        this.angle -= this.rotationSpeed * delta;
     }
 
-    public void update(){
+    public void update(double delta){
         if(this.isTurning)
             if(this.isTurningLeft)
-                this.turnLeft();
+                this.turnLeft(delta);
             else
-                this.turnRight();
+                this.turnRight(delta);
 
         if(this.isAccelerating)
-            this.accelerate();
+            this.accelerate(delta);
         else if(this.isDecelerating)
-            this.decelerate();
+            this.decelerate(delta);
 
         if(speed > 0 || speed < 0)
-            this.move();
+            this.move(delta);
     }
 
-    public void setAngle(double angle){
+    public void setAngle(){
         this.angle = angle;
     }
 
-    public double getAngle(double angle){
+    public double getAngle(){
         return this.angle;
     }
 }
