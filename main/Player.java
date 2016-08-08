@@ -20,18 +20,12 @@ public class Player extends Movable{
 
     @Override
     public void render(Graphics2D g){
-        g.setColor(Color.orange);
-        g.fill(new Area(new Arc2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0.0, 100.0, Arc2D.CHORD)));
-
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("../images/Penguin.png"));
+        if(this.getImage() != null){
+            g.drawImage(this.getImage(), (int)this.getX(), (int)this.getY(), (int)this.getWidth(), (int)this.getHeight(), null);
         }
-        catch(IOException e){
-            System.out.println(e);
+        else{
+            System.out.println("ERROR: No picture available.");
         }
-
-
     }
 
     public void setName(String name){

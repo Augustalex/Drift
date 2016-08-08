@@ -2,9 +2,12 @@ package main;
 
 import javafx.scene.transform.Affine;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +18,8 @@ public abstract class Renderable {
     private double posY;
     private double height;
     private double width;
+
+    BufferedImage img = null;
 
     public static ArrayList<Renderable> list = new ArrayList<Renderable>();
 
@@ -28,6 +33,23 @@ public abstract class Renderable {
     }
 
     public abstract void render(Graphics2D g);
+
+    public BufferedImage loadImage(String path){
+
+        try {
+            img = ImageIO.read(this.getClass().getResource("Penguin.png"));
+            System.out.println("Trying to print image2.");
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+
+        return this.img;
+    }
+
+    public BufferedImage getImage(){
+        return this.img;
+    }
 
     public double getX(){
         return this.posX;
