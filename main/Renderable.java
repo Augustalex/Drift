@@ -88,4 +88,7 @@ public abstract class Renderable {
         this.posX = x;
     }
 
+    public void destroy(){
+        Renderable.list.remove(this);
+    }
 }
