@@ -30,6 +30,8 @@ public class Player extends Movable{
         catch(IOException e){
             System.out.println(e);
         }
+
+
     }
 
     public void setName(String name){
