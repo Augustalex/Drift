@@ -1,5 +1,6 @@
 package main;
 
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,3 +30,12 @@ public class View{
     }
 
 }
+
+
+/*
+
+    x = x + r * cos(a);
+    y = y + r * sin(a);
+
+
+ */
