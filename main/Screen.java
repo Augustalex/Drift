@@ -14,7 +14,12 @@ public class Screen extends JPanel {
 
     @Override
     public void paintComponent(Graphics g){
-        g.setColor(Color.orange);
-        g.fillRect(10,10,60,60);
+        Graphics2D g2d = (Graphics2D) g;
+
+        for(int i = 0; i < Renderable.list.size(); i++){
+            Renderable.list.get(i).render(g2d);
+            System.out.println("Here");
+            System.out.println(((Player)Renderable.list.get(i)).getName());
+        }
     }
 }

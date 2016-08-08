@@ -5,6 +5,7 @@ import javafx.scene.transform.Affine;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.util.ArrayList;
 
 /**
  * Created by josef on 2016-08-08.
@@ -15,11 +16,15 @@ public abstract class Renderable {
     private double height;
     private double width;
 
+    public static ArrayList<Renderable> list = new ArrayList<Renderable>();
+
     Renderable(double x, double y, double width, double height){
         this.posX = x;
         this.posY = y;
         this.width = width;
         this.height = height;
+
+        Renderable.list.add(this);
     }
 
     public abstract void render(Graphics2D g);

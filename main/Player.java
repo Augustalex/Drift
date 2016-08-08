@@ -16,7 +16,7 @@ public class Player extends Movable{
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.cyan);
+        g.setColor(Color.orange);
         g.fill(new Area(new Arc2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0.0, 100.0, Arc2D.CHORD)));
     }
 
