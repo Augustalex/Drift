@@ -7,7 +7,7 @@ import java.awt.geom.Area;
 /**
  * Created by August on 2016-08-08.
  */
-public class Movable extends Renderable {
+public abstract class Movable extends Renderable {
     double speed = 0;
     double rotationMomentum = 0;
     double angle = 0;
@@ -72,12 +72,5 @@ public class Movable extends Renderable {
 
     public double getAngle(double angle){
         return this.angle;
-    }
-
-
-
-    @Override
-    public void render(Graphics2D g) {
-
     }
 }
