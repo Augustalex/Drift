@@ -61,4 +61,9 @@ public class Movable extends Renderable {
         if(speed > 0 || speed < 0)
             this.move();
     }
+
+    @Override
+    public void render(Graphics2D g) {
+
+    }
 }

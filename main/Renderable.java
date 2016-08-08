@@ -17,11 +17,11 @@ public abstract class Renderable {
 
     public abstract void render(Graphics2D g);
 
-    public double getPosX(){
+    public double getX(){
         return this.posX;
     }
 
-    public double getPosY(){
+    public double getY(){
         return this.posY;
     }
 
@@ -33,11 +33,11 @@ public abstract class Renderable {
         return width;
     }
 
-    public void setPosX(double X){
+    public void setX(double X){
         this.posX = X;
     }
 
-    public void setPosY(double Y){
+    public void setY(double Y){
         this.posY = Y;
     }
 
