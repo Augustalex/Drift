@@ -3,6 +3,7 @@ package main;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by August on 2016-08-08.
