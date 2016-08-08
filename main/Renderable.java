@@ -15,6 +15,13 @@ public abstract class Renderable {
     private double height;
     private double width;
 
+    Renderable(double x, double y, double width, double height){
+        this.posX = x;
+        this.posY = y;
+        this.width = width;
+        this.height = height;
+    }
+
     public abstract void render(Graphics2D g);
 
     public double getX(){
@@ -47,6 +54,11 @@ public abstract class Renderable {
 
     public void setWidth(double tempWidth){
         this.width = tempWidth;
+    }
+
+    public void setPosition(double x, double y){
+        this.posY = y;
+        this.posX = x;
     }
 
 }
