@@ -22,8 +22,8 @@ public class Movable extends Renderable {
     boolean isTurningLeft;
 
     public void move(){
-        this.setX = this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle)));
-        this.setY = this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle)));
+        this.setX(this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle))));
+        this.setY(this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle)));
     }
 
     public void turn(){
