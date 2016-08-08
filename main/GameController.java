@@ -1,23 +1,40 @@
 package main;
 
+import java.awt.event.InputEvent;
+
 /**
  * Created by August on 2016-08-08.
  */
 public class GameController{
 
     private boolean gameOn = true;
+    private GameModel model;
     private View view;
+    private InputHandler inputHandler;
 
     GameController(){
-        view = new View();
+        int width = 2000;
+        int height = 1200;
 
+        view = new View(width, height);
+        model = new GameModel(width, height);
+        view.init();
 
+        inputHandler = new InputHandler(this.model);
+        view.setInputHandler(inputHandler);
+        gameLoop();
     }
 
     public void update(double delta){
-//.
-    }
 
+        /*for(int i = 0; i < Renderable.list.size(); i++){
+            for(int j = 0; j < Renderable.list.get(i).size(); j++){
+                Renderable.list.get(i).get(j).update(delta);
+            }
+        }*/
+
+        this.model.update(delta);
+    }
 
     public void render(){
         this.view.render();

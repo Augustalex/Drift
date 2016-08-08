@@ -21,30 +21,44 @@ public abstract class Renderable {
 
     BufferedImage img = null;
 
-    public static ArrayList<Renderable> list = new ArrayList<Renderable>();
-
+    public static int nLayers = 2;
+    public static ArrayList<ArrayList<Renderable>> list = new ArrayList<ArrayList<Renderable>>();
+    public static boolean isInstantiated = false;
     Renderable(double x, double y, double width, double height){
         this.posX = x;
         this.posY = y;
         this.width = width;
         this.height = height;
 
-        Renderable.list.add(this);
+        if(!Renderable.isInstantiated){
+            for(int i = 0; i < Renderable.nLayers; i++){
+                Renderable.list.add(new ArrayList<Renderable>());
+            }
+            Renderable.isInstantiated = true;
+        }
+
+        if(this instanceof Map)
+            Renderable.list.get(0).add(this);
+        else
+            Renderable.list.get(1).add(this);
     }
 
     public abstract void render(Graphics2D g);
 
-    public BufferedImage loadImage(String path){
+    public abstract void update(double delta);
+
+    public void loadImage(String path){
+        BufferedImage img;
 
         try {
-            img = ImageIO.read(this.getClass().getResource("Penguin.png"));
+            img = ImageIO.read(this.getClass().getResource(path));
             System.out.println("Trying to print image2.");
+            this.img = img;
         }
         catch(IOException e){
             System.out.println(e);
         }
 
-        return this.img;
     }
 
     public BufferedImage getImage(){

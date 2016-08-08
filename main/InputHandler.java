@@ -12,6 +12,8 @@ public class InputHandler implements KeyListener {
 
     InputHandler(Updates actor){
         this.actor = actor;
+        System.out.println("New input handler.");
+        System.out.println(this.actor);
     }
 
     @Override
@@ -21,6 +23,7 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("Input!");
         actor.update(e);
     }
 

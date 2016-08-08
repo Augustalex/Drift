@@ -17,9 +17,10 @@ public class Screen extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         for(int i = 0; i < Renderable.list.size(); i++){
-            Renderable.list.get(i).render(g2d);
-            System.out.println("Here");
-            System.out.println(((Player)Renderable.list.get(i)).getName());
+            for(int j = 0; j < Renderable.list.get(i).size(); j++){
+                System.out.println(i + "->" + j + ": " +Renderable.list.get(i).get(j));
+                Renderable.list.get(i).get(j).render(g2d);
+            }
         }
     }
 

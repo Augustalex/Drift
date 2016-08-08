@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 
 /**
  * Created by josef on 2016-08-08.
@@ -12,18 +14,37 @@ public class GameModel implements Updates{
     private Map map;
     private Player player;
 
-    GameModel(){
+    GameModel(int screenWidth, int screenHeight){
         this.logic = new GameLogic();
 
-        this.map = new Map();
-        this.player = new Player(10, 10, 50, 50);
-
+        System.out.println(screenWidth + ", " + screenHeight);
+        this.map = new Map(screenWidth, screenHeight);
+        this.player = new Player(100, 100, 160, 60);
+        this.player.loadImage("res/TheTurtle.png");
 
 
     }
 
     @Override
     public void update(InputEvent e) {
+        System.out.println("New event: " + e);
+        if(e instanceof KeyEvent){
+            char key = ((KeyEvent) e).getKeyChar();
+            boolean toggleOn = false;
 
+            if(e.getID() == KeyEvent.KEY_PRESSED)
+                toggleOn = true;
+
+            System.out.println(e.getID() + " : " + KeyEvent.KEY_PRESSED);
+
+            switch(key){
+                case 'w':case 'a':case 's':case 'd':
+                    this.logic.togglePlayerMotionKey(this.player, key, toggleOn);
+            }
+        }
+    }
+
+    public void update(double delta){
+        this.logic.updatePlayerPosition(this.player, this.map, delta);
     }
 }
