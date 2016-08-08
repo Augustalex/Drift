@@ -3,6 +3,7 @@ package main;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -13,9 +14,9 @@ public abstract class Movable extends Renderable {
     double rotationMomentum = 0;
     double angle = 0;
 
-    double acceleration = 1;
-    double deceleration = 1;
-    double rotationSpeed = 10;
+    double acceleration = 0.2;
+    double deceleration = 0.4;
+    double rotationSpeed = 1;
 
     boolean isAccelerating = false;
     boolean isDecelerating = false;
@@ -27,8 +28,19 @@ public abstract class Movable extends Renderable {
     }
 
     public void move(double delta){
-        this.setX(this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle))));
-        this.setY(this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle))));
+        /*this.setX(this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle))));
+        this.setY(this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle))));*/
+
+        Point2D newPos = getNewPosition(delta);
+        this.setX(newPos.getX());
+        this.setY(newPos.getY());
+    }
+
+    public Point2D getNewPosition(double delta){
+        double x = this.getX() + (this.speed * Math.cos(Math.toRadians(this.angle)));
+        double y = this.getY() + (this.speed * Math.sin(Math.toRadians(this.angle)));
+
+        return (new Point2D.Double(x, y));
     }
 
     public void turn(double delta){
@@ -44,11 +56,11 @@ public abstract class Movable extends Renderable {
     }
 
     public void turnLeft(double delta){
-        this.angle += this.rotationSpeed * delta;
+        this.angle -= this.rotationSpeed * delta;
     }
 
     public void turnRight(double delta){
-        this.angle -= this.rotationSpeed * delta;
+        this.angle += this.rotationSpeed * delta;
     }
 
     public void update(double delta){
@@ -73,5 +85,10 @@ public abstract class Movable extends Renderable {
 
     public double getAngle(){
         return this.angle;
+    }
+
+    public void stunMovement(){
+        this.speed = this.speed * -1 * 0.2;
+        this.rotationMomentum = 0;
     }
 }

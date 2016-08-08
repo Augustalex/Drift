@@ -2,6 +2,7 @@ package main;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
@@ -21,10 +22,15 @@ public class Player extends Movable{
     @Override
     public void render(Graphics2D g){
         if(this.getImage() != null){
-            g.drawImage(this.getImage(), (int)this.getX(), (int)this.getY(), (int)this.getWidth(), (int)this.getHeight(), null);
-        }
-        else{
-            System.out.println("ERROR: No picture available.");
+            BufferedImage img = this.getImage();
+            AffineTransform at = new AffineTransform();
+            at.translate(this.getX(), this.getY());
+            at.rotate(Math.toRadians(this.angle));
+            double wScale = this.getWidth() / img.getWidth();
+            double hScale = this.getHeight() / img.getHeight();
+            at.scale(wScale, hScale);
+            at.translate(-img.getWidth()/2, img.getHeight());
+            g.drawImage(this.getImage(), at, null);
         }
     }
 
