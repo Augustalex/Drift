@@ -21,6 +21,8 @@ public abstract class Renderable {
     private double height;
     private double width;
 
+    private boolean inView = false;
+
     BufferedImage img = null;
 
     //public static int nLayers = 2;
@@ -29,7 +31,7 @@ public abstract class Renderable {
 
     public static ArrayList<Renderable> list = new ArrayList<Renderable>();
 
-    Renderable(double x, double y, double width, double height){
+    Renderable(double x, double y, double width, double height) {
         this.posX = x;
         this.posY = y;
         this.width = width;
@@ -47,82 +49,88 @@ public abstract class Renderable {
         else
             Renderable.list.get(1).add(this);*/
 
-        if(!(this instanceof Map))
-            Renderable.list.add(this);
+        Renderable.list.add(this);
     }
 
     public abstract void render(Graphics2D g);
 
     public abstract void update(double delta);
 
-    public void loadImage(String path){
+    public void loadImage(String path) {
         BufferedImage img;
 
         try {
             img = ImageIO.read(this.getClass().getResource(path));
             System.out.println("Trying to print image2.");
             this.img = img;
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
 
     }
 
-    public BufferedImage getImage(){
+    public BufferedImage getImage() {
         return this.img;
     }
 
-    public double getX(){
+    public double getX() {
         return this.posX;
     }
 
-    public double getY(){
+    public double getY() {
         return this.posY;
     }
 
-    public double getHeight(){
+    public double getHeight() {
         return height;
     }
 
-    public double getWidth(){
+    public double getWidth() {
         return width;
     }
 
-    public void setX(double X){
+    public void setX(double X) {
         this.posX = X;
     }
 
-    public void setY(double Y){
+    public void setY(double Y) {
         this.posY = Y;
     }
 
-    public void setHeight(double tempHeight){
+    public void setHeight(double tempHeight) {
         this.height = tempHeight;
     }
 
-    public void setWidth(double tempWidth){
+    public void setWidth(double tempWidth) {
         this.width = tempWidth;
     }
 
-    public void setPosition(double x, double y){
+    public void setPosition(double x, double y) {
         this.posY = y;
         this.posX = x;
     }
 
-    public void destroy(){
+    public void destroy() {
         Renderable.list.remove(this);
     }
 
-    public Area getRectangleArea(){
+    public Area getRectangleArea() {
         return (new Area(new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight())));
     }
 
-    public Area getCircleArea(){
+    public Area getCircleArea() {
         return (new Area(new Arc2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0, 360, Arc2D.OPEN)));
     }
 
-    public Rectangle2D getRectangle(){
+    public Rectangle2D getRectangle() {
         return (new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight()));
+    }
+
+    public void toggleInView(){
+        this.inView = !(this.inView);
+    }
+
+    public boolean isInView(){
+        return this.inView;
     }
 }

@@ -14,8 +14,8 @@ public abstract class Movable extends Renderable {
     private double rotationMomentum = 0;
     private double angle = 0;
 
-    private double acceleration = 0.2;
-    private double deceleration = 0.4;
+    private double acceleration = 0.1;
+    private double deceleration = 0.2;
     private double rotationSpeed = 1;
 
     public boolean isAccelerating = false;
