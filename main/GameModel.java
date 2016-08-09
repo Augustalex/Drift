@@ -23,6 +23,8 @@ public class GameModel implements Updates{
         this.player = new Player(100, 100, 160, 60);
         this.player.loadImage("res/TheTurtle.png");
 
+        Dialog dialog = new Dialog(100, 100, 200, 100, true);
+        dialog.addPage(new Page(0, 0, 200, 50));
 
     }
 

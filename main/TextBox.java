@@ -5,12 +5,12 @@ import java.awt.*;
 /**
  * Created by josef on 2016-08-09.
  */
-public class TextBox extends ActionCall {
+public class TextBox extends Renderable {
 
     Font font = new Font("courier new", Font.PLAIN, 12);
 
-    TextBox(double posX, double posY, double width, double height) {
-        super(posX, posY, width, height);
+    TextBox(double x, double y, double width, double height) {
+        super(x, y, width, height);
     }
 
 
@@ -36,6 +36,12 @@ public class TextBox extends ActionCall {
 
     @Override
     public void render(Graphics2D g) {
+        g.setFont(this.font);
+        g.drawString("Hej August", (int)this.getX(), (int)this.getY());
+    }
+
+    @Override
+    public void update(double delta) {
 
     }
 }
