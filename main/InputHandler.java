@@ -23,7 +23,6 @@ public class InputHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Input!");
         actor.update(e);
     }
 

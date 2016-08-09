@@ -25,7 +25,7 @@ public class CanvasView extends Canvas {
         frame.setVisible(true);
 
 
-        createBufferStrategy(3);
+        createBufferStrategy(2);
         this.bufferStrategy = getBufferStrategy();
     }
 
@@ -33,17 +33,16 @@ public class CanvasView extends Canvas {
         //System.out.println("Rendering canvas");
         if(this.bufferStrategy == null){
             System.out.println("Creating new buffer strategy.");
-            createBufferStrategy(3);
+            createBufferStrategy(2);
             return;
         }
 
         Graphics g = this.bufferStrategy.getDrawGraphics();
 
         Graphics2D g2d = (Graphics2D) g;
-        for(int i = 0; i < Renderable.list.size(); i++){
-            if(Map.currentMap != null)
-                Map.currentMap.render(g2d);
-        }
+
+        if(Map.currentMap != null)
+            Map.currentMap.render(g2d);
 
         g.dispose();
         this.bufferStrategy.show();
