@@ -41,7 +41,6 @@ public class Map extends Renderable{
 
         for(int i = 0; i < Map.inView.size(); i++){
             Map.inView.get(i).render(g);
-            System.out.println("rendering: " + Map.inView.get(i));
         }
     }
 

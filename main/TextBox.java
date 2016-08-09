@@ -11,6 +11,7 @@ public class TextBox extends Renderable {
 
     TextBox(double x, double y, double width, double height) {
         super(x, y, width, height);
+        this.destroy();
     }
 
 
@@ -37,7 +38,8 @@ public class TextBox extends Renderable {
     @Override
     public void render(Graphics2D g) {
         g.setFont(this.font);
-        g.drawString("Hej August", (int)this.getX(), (int)this.getY());
+        g.setColor(Color.black);
+        g.drawString("Hej August", (int)this.getX(), (int)this.getY() + this.getFont().getSize());
     }
 
     @Override

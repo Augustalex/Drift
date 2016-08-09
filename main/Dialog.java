@@ -56,7 +56,15 @@ public class Dialog extends ActionCall{
         g.fill(new Rectangle((int)this.getX(), (int)this.getY(), (int)this.getWidth(), (int)this.getHeight()));
 
         if(this.pages.size() > 0 ) {
-            this.pages.get(this.currentPage).render(g);
+
+            Page page = this.pages.get(this.currentPage);
+            double pageX = page.getX();
+            double pageY = page.getY();
+
+            page.setPosition(this.getX() + pageX, this.getY() + pageY);
+
+            page.render(g);
+            page.setPosition(pageX, pageY);
         }
         else{
             System.out.println("ERROR: No pages in page Array.");

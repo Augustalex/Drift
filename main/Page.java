@@ -1,5 +1,6 @@
 package main;
 
+import javax.xml.soap.Text;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -14,11 +15,26 @@ public class Page extends Renderable {
 
     Page(double posX, double posY, double width, double height){
         super(posX, posY, width, height);
+        this.destroy();
     }
 
     @Override
     public void render(Graphics2D g) {
+        for(int i = 0; i < textBoxes.size(); i ++){
 
+            TextBox box = textBoxes.get(i);
+            double boxX = box.getX();
+            double boxY = box.getY();
+
+            box.setPosition(this.getX() + boxX, this.getY() + boxY);
+
+            /*if(i > 0){
+                textBoxes.get(i).setY(textBoxes.get(i - 1).getY() + textBoxes.get(i - 1).getHeight());
+            } */
+
+            box.render(g);
+            box.setPosition(boxX, boxY);
+        }
     }
 
     @Override
@@ -27,9 +43,6 @@ public class Page extends Renderable {
     }
 
     public void addTextBox(TextBox box){
-        box.setX(this.getX() + box.getX());
-        box.setY(this.getY() + box.getY());
-
         this.textBoxes.add(box);
     }
 
