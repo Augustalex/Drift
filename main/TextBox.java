@@ -36,7 +36,8 @@ public class TextBox extends Renderable {
 
     @Override
     public void render(Graphics2D g) {
-
+        g.setFont(this.font);
+        g.drawString("Hej August", (int)this.getX(), (int)this.getY());
     }
 
     @Override
