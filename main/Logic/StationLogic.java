@@ -1,4 +1,4 @@
-package main;
+package main.Logic;
 
 /**
  * Created by August on 2016-08-09.

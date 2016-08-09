@@ -7,6 +7,7 @@ import java.awt.*;
 /**
  * Created by August on 2016-08-08.
  */
+
 public class View{
 
     private JFrame window;
@@ -17,15 +18,17 @@ public class View{
         screen = new Screen();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setContentPane(screen);
         window.setPreferredSize(new Dimension(width+50,height+50));
         window.setLayout(new GridLayout(1,2));
 
+        window.setIgnoreRepaint(true);
+        screen.setIgnoreRepaint(true);
         screen.setPreferredSize(new Dimension(width,height));
     }
 
     public void init(){
         screen.setVisible(true);
+        window.getContentPane().add(screen);
 
         window.pack();
         window.setVisible(true);

@@ -19,6 +19,7 @@ public class GameModel implements Updates{
 
         System.out.println(screenWidth + ", " + screenHeight);
         this.map = new Map(screenWidth, screenHeight);
+        this.map.setToCurrentMap();
         this.player = new Player(100, 100, 160, 60);
         this.player.loadImage("res/TheTurtle.png");
 
@@ -28,6 +29,7 @@ public class GameModel implements Updates{
     @Override
     public void update(InputEvent e) {
         System.out.println("New event: " + e);
+
         if(e instanceof KeyEvent){
             char key = ((KeyEvent) e).getKeyChar();
             boolean toggleOn = false;
@@ -39,12 +41,14 @@ public class GameModel implements Updates{
 
             switch(key){
                 case 'w':case 'a':case 's':case 'd':
-                    this.logic.togglePlayerMotionKey(this.player, key, toggleOn);
+                    this.logic.movable.togglePlayerMotionKey(this.player, key, toggleOn);
             }
         }
     }
 
     public void update(double delta){
-        this.logic.updatePlayerPosition(this.player, this.map, delta);
+        this.map.update(delta);
+        this.logic.movable.updatePlayerPosition(this.player, this.map, delta);
+
     }
 }

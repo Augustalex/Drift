@@ -5,7 +5,9 @@ import javafx.scene.transform.Affine;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,16 +23,19 @@ public abstract class Renderable {
 
     BufferedImage img = null;
 
-    public static int nLayers = 2;
-    public static ArrayList<ArrayList<Renderable>> list = new ArrayList<ArrayList<Renderable>>();
-    public static boolean isInstantiated = false;
+    //public static int nLayers = 2;
+    //public static ArrayList<ArrayList<Renderable>> list = new ArrayList<ArrayList<Renderable>>();
+    //public static boolean isInstantiated = false;
+
+    public static ArrayList<Renderable> list = new ArrayList<Renderable>();
+
     Renderable(double x, double y, double width, double height){
         this.posX = x;
         this.posY = y;
         this.width = width;
         this.height = height;
 
-        if(!Renderable.isInstantiated){
+        /*if(!Renderable.isInstantiated){
             for(int i = 0; i < Renderable.nLayers; i++){
                 Renderable.list.add(new ArrayList<Renderable>());
             }
@@ -40,7 +45,10 @@ public abstract class Renderable {
         if(this instanceof Map)
             Renderable.list.get(0).add(this);
         else
-            Renderable.list.get(1).add(this);
+            Renderable.list.get(1).add(this);*/
+
+        if(!(this instanceof Map))
+            Renderable.list.add(this);
     }
 
     public abstract void render(Graphics2D g);
@@ -104,5 +112,17 @@ public abstract class Renderable {
 
     public void destroy(){
         Renderable.list.remove(this);
+    }
+
+    public Area getRectangleArea(){
+        return (new Area(new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight())));
+    }
+
+    public Area getCircleArea(){
+        return (new Area(new Arc2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0, 360, Arc2D.OPEN)));
+    }
+
+    public Rectangle2D getRectangle(){
+        return (new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight()));
     }
 }

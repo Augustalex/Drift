@@ -10,18 +10,18 @@ import java.awt.image.BufferedImage;
  * Created by August on 2016-08-08.
  */
 public abstract class Movable extends Renderable {
-    double speed = 0;
-    double rotationMomentum = 0;
-    double angle = 0;
+    private double speed = 0;
+    private double rotationMomentum = 0;
+    private double angle = 0;
 
-    double acceleration = 0.2;
-    double deceleration = 0.4;
-    double rotationSpeed = 1;
+    private double acceleration = 0.2;
+    private double deceleration = 0.4;
+    private double rotationSpeed = 1;
 
-    boolean isAccelerating = false;
-    boolean isDecelerating = false;
-    boolean isTurning = false;
-    boolean isTurningLeft = false;
+    public boolean isAccelerating = false;
+    public boolean isDecelerating = false;
+    public boolean isTurning = false;
+    public boolean isTurningLeft = false;
 
     Movable(double x, double y, double width, double height){
         super(x, y, width, height);

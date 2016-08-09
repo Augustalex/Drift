@@ -9,19 +9,17 @@ public class GameController{
 
     private boolean gameOn = true;
     private GameModel model;
-    private View view;
+    private CanvasView canvas;
     private InputHandler inputHandler;
 
     GameController(){
         int width = 2000;
         int height = 1200;
 
-        view = new View(width, height);
+        this.canvas = new CanvasView(width, height);
         model = new GameModel(width, height);
-        view.init();
-
         inputHandler = new InputHandler(this.model);
-        view.setInputHandler(inputHandler);
+        this.canvas.setInputHandler(inputHandler);
         gameLoop();
     }
 
@@ -37,7 +35,7 @@ public class GameController{
     }
 
     public void render(){
-        this.view.render();
+        this.canvas.render();
     }
 
     public void gameLoop(){
@@ -68,7 +66,7 @@ public class GameController{
             render();
 
             try{
-                Thread.sleep((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000);
+                Thread.sleep((System.nanoTime()-lastLoopTime + OPTIMAL_TIME)/1000000);
             }
             catch(Exception e){
                 System.out.println(e);

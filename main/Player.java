@@ -25,7 +25,7 @@ public class Player extends Movable{
             BufferedImage img = this.getImage();
             AffineTransform at = new AffineTransform();
             at.translate(this.getX(), this.getY());
-            at.rotate(Math.toRadians(this.angle));
+            at.rotate(Math.toRadians(this.getAngle()));
             double wScale = this.getWidth() / img.getWidth();
             double hScale = this.getHeight() / img.getHeight();
             at.scale(wScale, hScale);
