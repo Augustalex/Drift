@@ -76,7 +76,7 @@ public class Dialog extends ActionCall{
     }
 
     public void nextPage(){
-        if(currentPage < pages.size()){
+        if(currentPage <= pages.size()){
             currentPage ++;
         }
         else{
