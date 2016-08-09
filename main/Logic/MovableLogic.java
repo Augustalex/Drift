@@ -33,9 +33,9 @@ public class MovableLogic {
 
     public void updatePlayerPosition(Player player, Map map, double delta){
         //map.moveViewToChunk(player.getNewPosition(delta));
-        Point2D newPos = player.getNewPosition(delta);
+        /*Point2D newPos = player.getNewPosition(delta);
         Rectangle2D view = map.getView();
-        map.moveView(newPos.getX() + (newPos.getX()-view.getX()), newPos.getY() + (newPos.getY()-view.getY()));
+        map.moveView(newPos.getX() + (newPos.getX()-view.getX()), newPos.getY() + (newPos.getY()-view.getY()));*/
         /*
         Point2D newPos = player.getNewPosition(delta);
         if(newPos.getX() >= map.getWidth() || newPos.getX() <= 0)

@@ -24,7 +24,7 @@ public class GameModel implements Updates{
         this.map.setToCurrentMap();
         this.map.setCurrentViewDimensions(screenWidth, screenHeight);
 
-        this.player = new Player(screenWidth, screenHeight, 160, 60);
+        this.player = new Player(screenWidth/2, screenHeight/2, 160, 60);
         this.player.loadImage("res/TheTurtle.png");
         this.map.add(this.player);
 
