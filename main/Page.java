@@ -26,7 +26,12 @@ public class Page extends Renderable {
             double boxX = box.getX();
             double boxY = box.getY();
 
-            box.setPosition(this.getX() + boxX, this.getY() + boxY);
+            if(i > 0) {
+                box.setPosition(this.getX() + boxX, this.getY() + textBoxes.get(i - 1).getY() + textBoxes.get(i - 1).getFont().getSize());
+            }
+            else{
+                box.setPosition(this.getX() + boxX, this.getY() + boxY);
+            }
 
             /*if(i > 0){
                 textBoxes.get(i).setY(textBoxes.get(i - 1).getY() + textBoxes.get(i - 1).getHeight());

@@ -31,7 +31,7 @@ public class GameModel implements Updates{
         Dialog dialog = new Dialog(300, 100, 200, 100, true);
 
         Page page = new Page(0, 0, 200, 50);
-        page.addTextBox(new TextBox(0, 0, 100, 50));
+        page.addTextBox(new TextBox("Hej August\nHär är en sträng", 0, 0, 5));
         dialog.addPage(page);
         this.map.add(dialog);
 
