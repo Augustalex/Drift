@@ -14,8 +14,8 @@ public class GameModel implements Updates{
     private Map map;
     private Player player;
 
-    private int worldWidth = 6000;
-    private int worldHeight = 6000;
+    private int worldWidth = 50000;
+    private int worldHeight = 50000;
 
     GameModel(int screenWidth, int screenHeight){
         this.logic = new GameLogic();
@@ -24,16 +24,9 @@ public class GameModel implements Updates{
         this.map.setToCurrentMap();
         this.map.setCurrentViewDimensions(screenWidth, screenHeight);
 
-        this.player = new Player(screenWidth/2, screenHeight/2, 160, 60);
+        this.player = new Player(100, 200, 160, 60);
         this.player.loadImage("res/TheTurtle.png");
         this.map.add(this.player);
-
-        Dialog dialog = new Dialog(300, 100, 200, 100, true);
-
-        Page page = new Page(0, 0, 200, 50);
-        page.addTextBox(new TextBox("Hej August\nHär är en sträng", 0, 0, 5));
-        dialog.addPage(page);
-        this.map.add(dialog);
 
     }
 

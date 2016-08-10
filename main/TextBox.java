@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -8,8 +9,10 @@ import java.util.ArrayList;
  */
 public class TextBox extends Renderable {
 
-    Font font = new Font("courier new", Font.PLAIN, 12);
+    public static int standardSize = 16;
+    Font font = new Font("courier new", Font.PLAIN, standardSize);
     private double lineSpacing = 1.2;
+    private Color color = Color.WHITE;
 
     ArrayList<String> lines = new ArrayList<String>();
 
@@ -18,38 +21,40 @@ public class TextBox extends Renderable {
         this.destroy();
     }
 
-    TextBox(String text, double x, double y, int lineWidth){
-        super(0,0,0,0);
+    public TextBox(String text, double x, double y, Color color){
+        super(x, y, 0, 0);
 
-        char [] line = new char[lineWidth+1];
+        this.color = color;
+        parseText(text, 0);
+    }
+
+    public TextBox(String text, double x, double y, int lineWidth){
+        super(x,y,0,0);
+
+        parseText(text, lineWidth);
+    }
+
+    public void parseText(String text, int lineWidth){
+        if(lineWidth == 0)
+            lineWidth = text.length();
+
+        char [] line = new char[lineWidth];
 
         int linePosition = 0;
-        System.out.println(text);
         for(int i = 0; i < text.length(); i++){
-            System.out.print(text.charAt(i) + ", ");
             if(linePosition >= lineWidth || text.charAt(i) == '\n'){
                 String tempString = new String(line);
                 this.lines.add(tempString);
                 linePosition = 0;
-                System.out.println(tempString);
-            }
-
-            if(text.charAt(i) == '\n'){
-                System.out.println("\\n");
             }
 
             line[linePosition] = text.charAt(i);
             linePosition++;
         }
-        this.lines.add(new String(line));
-
-        System.out.println("Lines: ");
-
-        for(int i = 0; i < lines.size(); i ++){
-            System.out.print(lines.get(i) + " ");
+        for(int p = linePosition; p < lineWidth; p++){
+            line[linePosition++] = ' ';
         }
-        System.out.println("");
-
+        this.lines.add(new String(line));
     }
 
     public void setFont(Font font){
@@ -75,7 +80,7 @@ public class TextBox extends Renderable {
     @Override
     public void render(Graphics2D g) {
         g.setFont(this.font);
-        g.setColor(Color.black);
+        g.setColor(this.color);
 
         double currentX = this.getX();
         double currentY = this.getY() + this.getFont().getSize();
@@ -85,6 +90,11 @@ public class TextBox extends Renderable {
             }
             g.drawString(lines.get(i), (int)currentX, (int)currentY);
         }
+    }
+
+    @Override
+    public void render(Graphics2D g, double xOffset, double yOffset) {
+
     }
 
     @Override

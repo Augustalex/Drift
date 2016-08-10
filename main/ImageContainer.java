@@ -19,6 +19,11 @@ public class ImageContainer extends Renderable {
     }
 
     @Override
+    public void render(Graphics2D g, double xOffset, double yOffset) {
+
+    }
+
+    @Override
     public void update(double delta) {
 
     }

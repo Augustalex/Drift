@@ -71,6 +71,11 @@ public class Dialog extends ActionCall{
         }
     }
 
+    @Override
+    public void render(Graphics2D g, double xOffset, double yOffset) {
+
+    }
+
     public void addPage(Page pageOb){
         pages.add(pageOb);
     }

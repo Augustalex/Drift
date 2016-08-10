@@ -1,22 +1,27 @@
 package main;
 
+import org.w3c.dom.css.Rect;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 /**
  * Created by August on 2016-08-08.
  */
-public abstract class Movable extends Renderable {
+public abstract class Movable extends ChunkObject{
+    private final double topSpeed = 10;
     private double speed = 0;
     private double rotationMomentum = 0;
     private double angle = 0;
 
-    private double acceleration = 0.1;
-    private double deceleration = 0.2;
-    private double rotationSpeed = 1;
+    private double acceleration = 0.008;
+    private double deceleration = 0.004;
+    private double rotationSpeed = 0.1;
 
     public boolean isAccelerating = false;
     public boolean isDecelerating = false;
@@ -48,11 +53,19 @@ public abstract class Movable extends Renderable {
     }
 
     public void accelerate(double delta){
-        this.speed += this.acceleration * delta;
+        if(speed >= topSpeed){
+            speed = topSpeed;
+        }
+        else
+            this.speed += this.acceleration * delta;
     }
 
     public void decelerate(double delta){
-        this.speed -= this.deceleration * delta;
+        if(-speed >= topSpeed){
+            speed = -topSpeed;
+        }
+        else
+            this.speed -= this.deceleration * delta;
     }
 
     public void turnLeft(double delta){
@@ -90,5 +103,39 @@ public abstract class Movable extends Renderable {
     public void stunMovement(){
         this.speed = this.speed * -1 * 0.2;
         this.rotationMomentum = 0;
+    }
+
+    public AffineTransform getTransformation(double xOffset, double yOffset){
+        AffineTransform trans = new AffineTransform();
+        trans.rotate(Math.toRadians(this.getAngle()), (int)this.getX()-xOffset, (int)this.getY()-yOffset);
+
+        BufferedImage img = this.getImage();
+        if(img == null)
+            return trans;
+
+        double wScale = this.getWidth() / img.getWidth();
+        double hScale = this.getHeight() / img.getHeight();
+        trans.scale(wScale, hScale);
+        return trans;
+    }
+
+    public AffineTransform getTransformation(){
+        return this.getTransformation(0, 0);
+    }
+
+    @Override
+    public Shape getShape(double xOffset, double yOffset){
+        Rectangle2D rect = this.getRectangle();
+        AffineTransform at = this.getTransformation(xOffset, yOffset);
+        Shape newRect = at.createTransformedShape(rect);
+        return newRect;
+    }
+
+    public double getSpeed(){
+        return this.speed;
+    }
+
+    public double getRotationMomentum(){
+        return this.rotationMomentum;
     }
 }

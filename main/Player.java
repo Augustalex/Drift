@@ -1,13 +1,7 @@
 package main;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by August on 2016-08-08.
@@ -21,17 +15,22 @@ public class Player extends Movable{
 
     @Override
     public void render(Graphics2D g){
+
+    }
+
+    @Override
+    public void render(Graphics2D g, double xOffset, double yOffset) {
         if(this.getImage() != null){
-            BufferedImage img = this.getImage();
-            AffineTransform at = new AffineTransform();
-            at.translate(this.getX(), this.getY());
-            at.rotate(Math.toRadians(this.getAngle()));
-            double wScale = this.getWidth() / img.getWidth();
-            double hScale = this.getHeight() / img.getHeight();
-            at.scale(wScale, hScale);
-            at.translate(-img.getWidth()/2, img.getHeight());
-            g.drawImage(this.getImage(), at, null);
+            AffineTransform backup = g.getTransform();
+            AffineTransform trans = this.getTransformation(xOffset, yOffset);
+            g.transform(trans);
+            g.drawImage(this.getImage(), (int)(this.getX()-xOffset), (int)(this.getY()-yOffset), null);
+            g.setTransform(backup);
+            //g.drawImage(this.getImage(), this.getTransformation(xOffset, yOffset), null);
         }
+
+        String info = String.format("[ X:%f, Y:%f ] [ CX:%d, CY:%d ] [ SPEED:%f, ROTATION:%f, ANGLE:%f ]", this.getX(), this.getY(), this.getChunkPosition().x, this.getChunkPosition().y, this.getSpeed(), this.getRotationMomentum(), this.getAngle());
+        DebugInfo.textBoxes.add(new TextBox(info, 50, 50, Color.green));
     }
 
     public void setName(String name){

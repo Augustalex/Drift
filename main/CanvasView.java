@@ -44,6 +44,9 @@ public class CanvasView extends Canvas {
         if(Map.currentMap != null)
             Map.currentMap.render(g2d);
 
+        if(DebugInfo.textBoxes.size() > 0)
+            DebugInfo.renderAll(g2d);
+
         g.dispose();
         this.bufferStrategy.show();
     }

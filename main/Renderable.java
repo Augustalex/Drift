@@ -4,10 +4,7 @@ import javafx.scene.transform.Affine;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,6 +50,8 @@ public abstract class Renderable {
     }
 
     public abstract void render(Graphics2D g);
+
+    public abstract void render(Graphics2D g, double xOffset, double yOffset);
 
     public abstract void update(double delta);
 
@@ -110,6 +109,10 @@ public abstract class Renderable {
         this.posX = x;
     }
 
+    public Point2D getPosition(){
+        return (new Point2D.Double(this.getX(), this.getY()));
+    }
+
     public void destroy() {
         Renderable.list.remove(this);
     }
@@ -124,6 +127,15 @@ public abstract class Renderable {
 
     public Rectangle2D getRectangle() {
         return (new Rectangle2D.Double(this.getX(), this.getY(), this.getWidth(), this.getHeight()));
+
+    }
+
+    public Rectangle2D getRectangle(double xOffset, double yOffset){
+        return (new Rectangle2D.Double(this.getX()-xOffset, this.getY()-yOffset, this.getWidth(), this.getHeight()));
+    }
+
+    public Shape getShape(double xOffset, double yOffset){
+        return this.getRectangle();
     }
 
     public void toggleInView(){

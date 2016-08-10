@@ -13,8 +13,8 @@ public class GameController{
     private InputHandler inputHandler;
 
     GameController(){
-        int width = 2000;
-        int height = 1200;
+        int width = 3200;
+        int height = 2200;
 
         this.canvas = new CanvasView(width, height);
         model = new GameModel(width, height);

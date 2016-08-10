@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -55,6 +56,11 @@ public class Chunk extends Renderable {
     }
 
     @Override
+    public void render(Graphics2D g, double xOffset, double yOffset) {
+
+    }
+
+    @Override
     public void update(double delta) {
         for(int i = 0; i < this.objects.size(); i++){
             this.objects.get(i).update(delta);
@@ -78,10 +84,6 @@ public class Chunk extends Renderable {
 
     public void removeObject(Renderable object){
         this.objects.remove(object);
-    }
-
-    public Renderable getObject(Renderable object){
-        return this.objects.get(this.objects.indexOf(object));
     }
 
     public void printInfo(){
