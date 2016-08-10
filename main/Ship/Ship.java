@@ -1,5 +1,8 @@
 package main.Ship;
 
+import main.Ship.Auxiliary.Auxiliary;
+import main.Ship.Engine.Engine;
+
 /**
  * Created by DAW 28 on 2016-08-10.
  */
@@ -30,5 +33,6 @@ package main.Ship;
 
 public class Ship {
 
+    Ship(Engine engine, Auxiliary auxiliary, )
 
 }

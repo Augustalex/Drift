@@ -6,6 +6,9 @@ package main.Ship.Engine;
 public class CatapillerBoatmotor extends Engine{
 
     CatapillerBoatmotor(){
-        super("Caterpiller Ship Engine, 520 kW", 100, 100);
+        super("Caterpiller Ship Engine, 520 kW", 100, 100, 400);
+        this.addAvivableFuelTypes("Disel");
+        this.addAvivableFuelTypes("Gasoline");
+        this.addAvivableFuelTypes("Kerosene");
     }
 }

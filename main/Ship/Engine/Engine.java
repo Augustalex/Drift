@@ -1,25 +1,33 @@
 package main.Ship.Engine;
 
+import main.Ship.Hull;
+
+import java.util.ArrayList;
+
 /**
  * Created by DAW 28 on 2016-08-10.
  */
-public class Engine {
+public class Engine extends Hull{
     private double tankSize;
-    private double efficiency;
+    private double engineEfficiency;
     private double fuelPercent;
     private String name;
+    private ArrayList<String> avivableFuelTypes;
+    int engineSize;
 
-    Engine(String name, double efficiency, double tankSize){
-        this.efficiency = efficiency;
+    Engine(String name, double efficiency, double tankSize, int hullValue, int engineSize){
+        super(hullValue);
+        this.engineEfficiency = efficiency;
         this.name = name;
         this.tankSize = tankSize;
+        this.engineSize = engineSize;
     }
 
-    public double getEfficiency(){
-        return efficiency;
+    public double getEngineEfficiency(){
+        return engineEfficiency;
     }
-    public void setEfficiency(double x){
-        efficiency = x;
+    public void setEngineEfficiency(double x){
+        engineEfficiency = x;
     }
 
     public double getFuelPercent(){
@@ -64,5 +72,22 @@ public class Engine {
         tankSize = n;
     }
 
+    public void addAvivableFuelTypes(String fuel){
+        avivableFuelTypes.add(fuel);
+    }
+
+    public boolean canUseFuel(String name){
+        for(int i = 0; i < avivableFuelTypes.size(); i ++){
+            if(avivableFuelTypes.get(i) == name){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int getEngineSize(){
+        return engineSize;
+    }
 
 }
