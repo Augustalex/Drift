@@ -10,5 +10,7 @@ public class Tank {
     public int tankSize;
     public int tankCapacity;
 
-    Tank(Fuel fuelType, int tankCapacity)
+    Tank(Fuel fuelType, int tankCapacity){
+
+    }
 }

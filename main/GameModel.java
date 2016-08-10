@@ -14,8 +14,8 @@ public class GameModel implements Updates{
     private Map map;
     private Player player;
 
-    private int worldWidth = 50000;
-    private int worldHeight = 50000;
+    private int worldWidth = 10000000; //Senaste gränsen: 100 000 000
+    private int worldHeight = 10000000;
 
     GameModel(int screenWidth, int screenHeight){
         this.logic = new GameLogic();
@@ -24,10 +24,12 @@ public class GameModel implements Updates{
         this.map.setToCurrentMap();
         this.map.setCurrentViewDimensions(screenWidth, screenHeight);
 
-        this.player = new Player(100, 200, 160, 60);
+        this.player = new Player(1500, 1500, 50, 20);
         this.player.loadImage("res/TheTurtle.png");
         this.map.add(this.player);
 
+        Planet planet = new Planet(10500,10500, 4000,4000);
+        this.map.add(planet);
     }
 
     @Override

@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Created by August on 2016-08-08.
@@ -26,7 +27,6 @@ public class Player extends Movable{
             g.transform(trans);
             g.drawImage(this.getImage(), (int)(this.getX()-xOffset), (int)(this.getY()-yOffset), null);
             g.setTransform(backup);
-            //g.drawImage(this.getImage(), this.getTransformation(xOffset, yOffset), null);
         }
 
         String info = String.format("[ X:%f, Y:%f ] [ CX:%d, CY:%d ] [ SPEED:%f, ROTATION:%f, ANGLE:%f ]", this.getX(), this.getY(), this.getChunkPosition().x, this.getChunkPosition().y, this.getSpeed(), this.getRotationMomentum(), this.getAngle());

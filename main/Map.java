@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Map{
 
-    private static final int X_CHUNK = 1000;
-    private static final int Y_CHUNK = 1000;
+    private static final int X_CHUNK = 10000;
+    private static final int Y_CHUNK = 10000;
     private int totalWidth = 1000;
     private int totalHeight = 1000;
 
@@ -91,12 +91,11 @@ public class Map{
         return (new Rectangle2D.Double(this.viewX, this.viewY, this.viewWidth, this.viewHeight));
     }
     public void render(Graphics2D g) {
-        g.clearRect(0,0,(int)this.viewWidth, (int) this.viewHeight);
+        //g.clearRect(0,0,(int)this.viewWidth, (int) this.viewHeight);
         g.setColor(Color.BLACK);
         g.fillRect(0,0, (int) this.viewWidth, (int)this.viewHeight);
+
         ArrayList<Chunk> chunksInView = getChunksInView();
-        if(chunksInView == null)
-            return;
 
         g.setColor(Color.YELLOW);
         g.setStroke(new BasicStroke(3));
@@ -106,6 +105,7 @@ public class Map{
                 object.render(g, this.viewX, this.viewY);
 
                 /*          DEBUG OUTLINES          */
+                /*
                 if(object instanceof Movable) {
                     AffineTransform backup = g.getTransform();
                     AffineTransform trans = ((Movable) object).getTransformation(this.viewX, this.viewY);
@@ -114,18 +114,24 @@ public class Map{
                     g.setTransform(backup);
                 }
                 else
-                    g.draw(object.getRectangle(this.viewX, this.viewY));
+                    g.draw(object.getRectangle(this.viewX, this.viewY));*/
+
             }
 
-            /*          DEBUG OUTLINES          */
+            //          Debug Chunk Outlines
             g.draw(chunksInView.get(i).getRectangle(this.viewX, this.viewY));
             Rectangle2D rect = chunksInView.get(i).getRectangle();
-            Rectangle2D newRect = new Rectangle2D.Double((rect.getX()-this.viewX)+Chunk.superWidth/2, (rect.getY()-this.viewY)+Chunk.superHeight/2, 5, 5);
-            g.fill(newRect);
+
+            //          Debug Center Points
+            /*Rectangle2D newRect = new Rectangle2D.Double((rect.getX()-this.viewX)+Chunk.superWidth/2, (rect.getY()-this.viewY)+Chunk.superHeight/2, 5, 5);
+            g.fill(newRect);*/
         }
 
-        g.setColor(Color.RED);
+
+        //      Debug View Center Point
+        /*g.setColor(Color.RED);
         g.fill(new Rectangle2D.Double(this.viewX+this.viewWidth/2, this.viewY+this.viewHeight/2, 10, 10));
+        */
 
     }
 
@@ -231,11 +237,7 @@ public class Map{
             this.chunks.get(y).get(x).objects.remove(object);
             this.chunks.get(newY).get(newX).objects.add(object);
             ((ChunkObject) object).setChunkPosition(newX, newY);
-            System.out.println("\nOld chunk: " + x + ", " + y + "\tNew Chunk: " + newX + ", " + newY);
         }
-        else
-            System.out.println(String.format("OLD: %d, %d\tNEW: %d, %d", x, y, newX, newY));
-
     }
 
     public boolean positionOutOfBounds(Point2D position){

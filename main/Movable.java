@@ -20,7 +20,7 @@ public abstract class Movable extends ChunkObject{
     private double angle = 0;
 
     private double acceleration = 0.008;
-    private double deceleration = 0.004;
+    private double deceleration = 0.02;
     private double rotationSpeed = 0.1;
 
     public boolean isAccelerating = false;
@@ -107,7 +107,10 @@ public abstract class Movable extends ChunkObject{
 
     public AffineTransform getTransformation(double xOffset, double yOffset){
         AffineTransform trans = new AffineTransform();
-        trans.rotate(Math.toRadians(this.getAngle()), (int)this.getX()-xOffset, (int)this.getY()-yOffset);
+        Rectangle2D view = Map.currentMap.getView();
+
+        trans.translate((int)(this.getX() - xOffset + this.getWidth()/2), (int)(this.getY() - yOffset + this.getHeight()/2));
+        trans.rotate(Math.toRadians(this.getAngle()));
 
         BufferedImage img = this.getImage();
         if(img == null)
@@ -115,7 +118,9 @@ public abstract class Movable extends ChunkObject{
 
         double wScale = this.getWidth() / img.getWidth();
         double hScale = this.getHeight() / img.getHeight();
+
         trans.scale(wScale, hScale);
+        trans.translate(-this.getX() + xOffset - this.getWidth()/2, -this.getY() + yOffset - this.getWidth()/2);
         return trans;
     }
 

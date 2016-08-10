@@ -33,6 +33,4 @@ import main.Ship.Engine.Engine;
 
 public class Ship {
 
-    Ship(Engine engine, Auxiliary auxiliary, )
-
 }
