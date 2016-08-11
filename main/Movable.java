@@ -28,7 +28,7 @@ public abstract class Movable extends ChunkObject{
     public boolean isTurning = false;
     public boolean isTurningLeft = false;
 
-    Movable(double x, double y, double width, double height){
+    protected Movable(double x, double y, double width, double height){
         super(x, y, width, height);
     }
 

@@ -46,7 +46,10 @@ public class GameModel implements Updates{
             switch(key){
                 case 'w':case 'a':case 's':case 'd':
                     this.logic.movable.togglePlayerMotionKey(this.player, key, toggleOn);
+
+
             }
+
         }
     }
 

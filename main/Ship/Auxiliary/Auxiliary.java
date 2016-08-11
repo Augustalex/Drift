@@ -12,7 +12,7 @@ public class Auxiliary {
     private int capacity;
     private ArrayList<AuxiliarieObject> auxiliarieObjects;
 
-    Auxiliary(int capacity){
+    public Auxiliary(int capacity){
         this.capacity = capacity;
 
     }

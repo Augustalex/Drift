@@ -35,7 +35,6 @@ public class Hull {
     public boolean isEmpty(){
         if(this.hullPoints <= 0)
             return true;
-
         else
             return false;
     }

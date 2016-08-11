@@ -13,4 +13,5 @@ public class Fuel {
         this.index = index;
     }
 
+
 }
