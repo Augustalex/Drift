@@ -14,8 +14,8 @@ public class GameModel implements Updates{
     private Map map;
     private Player player;
 
-    private int worldWidth = 10000000; //Senaste gränsen: 100 000 000
-    private int worldHeight = 10000000;
+    private int worldWidth = 100000; //Senaste gränsen: 100 000 000
+    private int worldHeight = 100000;
 
     GameModel(int screenWidth, int screenHeight){
         this.logic = new GameLogic();
@@ -24,7 +24,7 @@ public class GameModel implements Updates{
         this.map.setToCurrentMap();
         this.map.setCurrentViewDimensions(screenWidth, screenHeight);
 
-        this.player = new Player(1500, 1500, 50, 20);
+        this.player = new Player(screenWidth/2, screenHeight/2, 50, 20);
         this.player.loadImage("res/TheTurtle.png");
         this.map.add(this.player);
 

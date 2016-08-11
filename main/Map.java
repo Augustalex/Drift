@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Map{
 
-    private static final int X_CHUNK = 10000;
-    private static final int Y_CHUNK = 10000;
+    private static final int X_CHUNK = 1000;
+    private static final int Y_CHUNK = 1000;
     private int totalWidth = 1000;
     private int totalHeight = 1000;
 
@@ -30,6 +30,8 @@ public class Map{
     private int nXChunks = 0;
     private int nYChunks = 0;
     public ArrayList<ArrayList<Chunk>> chunks = new ArrayList<>();
+
+    public Chunk[][] allChunks;
     //public ArrayList<Renderable> inView = new ArrayList<Renderable>();
 
     Map(int totalWidth, int totalHeight){
@@ -41,12 +43,14 @@ public class Map{
         Chunk.superWidth = totalWidth/this.nXChunks;
         Chunk.superHeight = totalHeight/this.nYChunks;
 
+        this.allChunks = new Chunk[this.nXChunks][this.nYChunks];
+
         for(int i = 0; i < this.nYChunks; i++){
-            this.chunks.add(new ArrayList<>());
             for(int j = 0; j < this.nXChunks; j++){
-                this.chunks.get(i).add(new Chunk(j, i));
+                this.allChunks[j][i] = new Chunk(j, i);
             }
         }
+        System.out.println("Made it");
     }
 
     public void setToCurrentMap(){
@@ -59,7 +63,9 @@ public class Map{
         this.viewHeight = height;
     }
 
-    public void moveView(double newX, double newY){
+    public void moveView(double x, double y){
+        double newX = x - this.viewWidth / 2;
+        double newY = y - this.viewHeight / 2;
         if(newX > 0 && newY > 0 && newX < this.totalWidth && newY < this.totalHeight){
             this.viewX = newX;
             this.viewY = newY;
@@ -95,7 +101,7 @@ public class Map{
         g.setColor(Color.BLACK);
         g.fillRect(0,0, (int) this.viewWidth, (int)this.viewHeight);
 
-        ArrayList<Chunk> chunksInView = getChunksInView();
+        ArrayList<Chunk> chunksInView = getChunksInView(30);
 
         g.setColor(Color.YELLOW);
         g.setStroke(new BasicStroke(3));
@@ -148,7 +154,7 @@ public class Map{
         try {
             int xChunk = (int) Math.floor(this.viewX / (this.totalWidth / nXChunks));
             int yChunk = (int) Math.floor(this.viewY / (this.totalHeight / nYChunks));
-            return this.chunks.get(yChunk).get(xChunk);
+            return this.allChunks[xChunk][yChunk];
         }
         catch(Exception e){
             System.out.println(e);
@@ -159,28 +165,11 @@ public class Map{
     public Chunk findChunk(double x, double y){
         int xChunk = (int)Math.floor(x / (this.totalWidth/nXChunks));
         int yChunk = (int)Math.floor(y / (this.totalHeight/nYChunks));
-        return this.chunks.get(yChunk).get(xChunk);
+        return this.allChunks[xChunk][yChunk];
     }
 
     public ArrayList<Chunk> getChunksInView(){
         ArrayList<Chunk> chunksInView = new ArrayList<>();
-        /*
-        Chunk cornerChunk = getCurrentChunk();
-        Point corner = new Point(cornerChunk.getChunkX(), cornerChunk.getChunkY());
-
-        chunksInView.add(cornerChunk);
-
-        Point[] others = {new Point(corner.x+1, corner.y), new Point(corner.x, corner.y+1), new Point(corner.x+1, corner.y+1)};
-
-        StringBuilder newString = new StringBuilder();
-        newString.append(String.format("CHUNK[%d, %d], ", cornerChunk.getChunkX(), cornerChunk.getChunkY()));
-        for(int i = 0; i < others.length; i++){
-            if(this.getCurrentViewArea().contains(others[i])) {
-                Chunk chunk = this.chunks.get(others[i].y).get(others[i].x);
-                chunksInView.add(chunk);
-                newString.append(String.format("CHUNK[%d, %d], ", chunk.getChunkX(), chunk.getChunkY()));
-            }
-        }*/
 
         StringBuilder newString = new StringBuilder();
         for(int i = 0; i < this.chunks.size(); i++){
@@ -195,6 +184,26 @@ public class Map{
 
         String finalString = newString.toString();
         DebugInfo.textBoxes.add(new TextBox(finalString, 100, this.viewHeight-50, Color.RED));
+        return chunksInView;
+    }
+
+    public ArrayList<Chunk> getChunksInView(int depth){
+        Chunk currentChunk = this.getCurrentChunk();
+        int x = currentChunk.getChunkX();
+        int y = currentChunk.getChunkY();
+
+        ArrayList<Chunk> chunksInView = new ArrayList<>();
+
+        for(int i = y - depth; i < y + depth; i++){
+            while(i < 0 || i > this.nYChunks)
+                i++;
+            for(int j = x - depth; j < x + depth; j++){
+                while(j < 0 ||j > this.nXChunks)
+                    j++;
+                chunksInView.add(this.allChunks[j][i]);
+            }
+        }
+
         return chunksInView;
     }
 
@@ -234,8 +243,8 @@ public class Map{
         int newY = (int)Math.floor(newPosition.getY()/Y_CHUNK);
 
         if(newX != x || newY != y){
-            this.chunks.get(y).get(x).objects.remove(object);
-            this.chunks.get(newY).get(newX).objects.add(object);
+            this.allChunks[x][y].objects.remove(object);
+            this.allChunks[newX][newY].objects.add(object);
             ((ChunkObject) object).setChunkPosition(newX, newY);
         }
     }

@@ -39,25 +39,28 @@ public class MovableLogic {
 
         Rectangle2D view = map.getView();
 
-        //Point2D center = new Point2D.Double(view.getX() + (view.getWidth()/2), view.getY() + (view.getHeight()/2));
+        Point2D center = new Point2D.Double(view.getX() + (view.getWidth()/2), view.getY() + (view.getHeight()/2));
 
-        //double distance = Math.hypot(center.getX()-newPos.getX(), center.getY()-newPos.getY());
+        double distance = Math.hypot(center.getX()-newPos.getX(), center.getY()-newPos.getY());
         Chunk currentChunk = map.findChunk(newPos.getX(), newPos.getY());
 
         TextBox.standardSize = 24;
-        //DebugInfo.textBoxes.add(new TextBox(String.format("DISTANCE: %f", distance), 100, 100, Color.WHITE));
+        DebugInfo.textBoxes.add(new TextBox(String.format("DISTANCE: %f", distance), 100, 100, Color.WHITE));
         DebugInfo.textBoxes.add(new TextBox(String.format("PLAYER: %f, %f", newPos.getX(), newPos.getY()), 100, 130, Color.RED));
         DebugInfo.textBoxes.add(new TextBox(String.format("VIEW: %f, %f", view.getX(), view.getY()), 100,160, Color.RED));
         DebugInfo.textBoxes.add(new TextBox(String.format("CHUNK: %d, %d", currentChunk.getChunkX(), currentChunk.getChunkY()), 100, 190, Color.RED));
-        /*if(distance > 500){
+
+        if(distance > 500){
             double xDiff = newPos.getX() - center.getX();
             double yDiff = newPos.getY() - center.getY();
-            map.moveView(xDiff, yDiff);
-        }*/
 
+        }
+
+        /*
         if(map.positionOutOfView(newPos))
             map.moveViewQuadrant(newPos);
-
+           */
+        map.moveView(newPos.getX(), newPos.getY());
 
         map.updateObjectChunk(player, newPos);
         player.update(delta);

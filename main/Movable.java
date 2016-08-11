@@ -21,7 +21,7 @@ public abstract class Movable extends ChunkObject{
 
     private double acceleration = 0.008;
     private double deceleration = 0.02;
-    private double rotationSpeed = 0.1;
+    private double rotationSpeed = 0.5;
 
     public boolean isAccelerating = false;
     public boolean isDecelerating = false;
