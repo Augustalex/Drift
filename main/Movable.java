@@ -14,7 +14,7 @@ import java.nio.Buffer;
  * Created by August on 2016-08-08.
  */
 public abstract class Movable extends ChunkObject{
-    private final double topSpeed = 10;
+    private final double topSpeed = 100;
     private double speed = 0;
     private double rotationMomentum = 0;
     private double angle = 0;

@@ -12,6 +12,7 @@ import main.Ship.Engine.Tank.Tank;
 import main.Ship.Fuel.Fuel;
 import main.Ship.Interior.Interior;
 import main.Ship.Interior.InteriorObject;
+import main.Ship.ShipTypes.TheTurtle;
 import main.TextBox;
 
 import java.awt.*;
@@ -52,17 +53,22 @@ public class Ship extends Movable{
     public Cockpit cockpit;
     public Auxiliary auxiliary;
     public Interior interior;
+    public String path;
 
-    public Ship(String name, String imgPath, int width, int height, int engienRoomCapacity, int cockpitCapacaty, int auxiliaryCapacaty, int interiorCapacaty){
+    public Ship(String name, String path, int width, int height, int engienRoomCapacity, int cockpitCapacaty, int auxiliaryCapacaty, int interiorCapacaty){
         super(0, 0, width, height);
         this.name = name;
+        this.path = path;
         engineRoom = new EngineRoom(engienRoomCapacity);
         cockpit = new Cockpit(cockpitCapacaty);
         auxiliary = new Auxiliary(auxiliaryCapacaty);
         interior = new Interior(interiorCapacaty);
 
-        this.loadImage(imgPath);
+        this.loadImage(this.path);
+    }
 
+    public String getImagePath(){
+        return this.path;
     }
 
     public boolean addEngineObject(Engine engine){

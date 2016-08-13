@@ -59,6 +59,7 @@ public abstract class Renderable {
         BufferedImage img;
 
         try {
+            System.out.println(this.getClass() + "." + this.getClass().getResource(path));
             img = ImageIO.read(this.getClass().getResource(path));
             System.out.println("Trying to print image2.");
             this.img = img;

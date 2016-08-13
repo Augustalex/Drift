@@ -10,7 +10,7 @@ public class Engine extends Hull{
     private double engineEfficiency;
     private double fuelPercent;
     private String name;
-    private ArrayList<String> avivableFuelTypes;
+    private ArrayList<String> avivableFuelTypes = new ArrayList<>();
     private int engineSize;
 
     Engine(String name, double efficiency, double tankSize, int hullValue, int engineSize){

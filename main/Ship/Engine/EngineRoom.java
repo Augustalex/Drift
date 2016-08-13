@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class EngineRoom {
 
     private int capacity;
-    public ArrayList<Engine> engine;
-    public ArrayList<Tank> tanks;
+    public ArrayList<Engine> engines = new ArrayList<>();
+    public ArrayList<Tank> tanks = new ArrayList<>();
 
     public EngineRoom(int capacity){
         this.capacity = capacity;
@@ -20,8 +20,8 @@ public class EngineRoom {
 
     public int getAllObjectSize(){
         int tempSize = 0;
-        for(int i = 0; i < engine.size(); i ++){
-            tempSize += engine.get(i).getEngineSize();
+        for(int i = 0; i < engines.size(); i ++){
+            tempSize += engines.get(i).getEngineSize();
         }
         for(int i = 0; i < tanks.size(); i ++){
             tempSize += tanks.get(i).tankSize;
@@ -32,7 +32,7 @@ public class EngineRoom {
 
     public boolean addEngine(Engine engine){
         if(capacity - this.getAllObjectSize() >= engine.getEngineSize()){
-            this.engine.add(engine);
+            this.engines.add(engine);
             return true;
         }
         else

@@ -15,24 +15,24 @@ public class MovableLogic {
     public void togglePlayerMotionKey(Player player, char key, boolean toggleOn){
         switch(key){
             case 'w':
-                player.isAccelerating = toggleOn;
+                player.playerShip.isAccelerating = toggleOn;
                 break;
             case 's':
-                player.isDecelerating = toggleOn;
+                player.playerShip.isDecelerating = toggleOn;
                 break;
             case 'a':
-                player.isTurning = toggleOn;
-                player.isTurningLeft = toggleOn;
+                player.playerShip.isTurning = toggleOn;
+                player.playerShip.isTurningLeft = toggleOn;
                 break;
             case 'd':
-                player.isTurning = toggleOn;
-                player.isTurningLeft = !toggleOn;
+                player.playerShip.isTurning = toggleOn;
+                player.playerShip.isTurningLeft = !toggleOn;
                 break;
         }
     }
 
     public void updatePlayerPosition(Player player, Map map, double delta){
-        Point2D newPos = player.getNewPosition(delta);
+        Point2D newPos = player.playerShip.getNewPosition(delta);
 
         if(map.positionOutOfBounds(newPos))
             return;
@@ -62,8 +62,8 @@ public class MovableLogic {
            */
         map.moveView(newPos.getX(), newPos.getY());
 
-        map.updateObjectChunk(player, newPos);
-        player.update(delta);
+        map.updateObjectChunk(player.playerShip, newPos);
+        player.playerShip.update(delta);
     }
 
     public void updateMovablePosition(Movable movable, Map map, double delta){

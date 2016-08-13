@@ -11,10 +11,10 @@ public class Tank extends Hull{
     public int tankSize;
     public int tankCapacity;
 
-    public Tank(int tankCapacity, int hullValue){
+    public Tank(int tankCapacity, int hullValue, Fuel fuelType){
         this.setHullPoints(hullValue);
         this.tankCapacity = tankCapacity;
-        this.addFuel(fuelType);
+        this.changeFuel(fuelType);
     }
 
     public int getTankSize(){
@@ -26,7 +26,7 @@ public class Tank extends Hull{
     }
 
     public boolean addFuel(Fuel fuel){
-        if(this.fuelType.name == fuel.name && this.fuelType.index < 1.0){
+        if(this.fuelType.name.equals(fuel.name) && this.fuelType.index < 1.0){
             this.fuelType.index = 1.0;
             return true;
         }

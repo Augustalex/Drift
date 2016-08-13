@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Map{
 
-    private static final int X_CHUNK = 1000;
-    private static final int Y_CHUNK = 1000;
+    private static final int X_CHUNK = 100000;
+    private static final int Y_CHUNK = 100000;
     private int totalWidth = 1000;
     private int totalHeight = 1000;
 
@@ -101,7 +101,7 @@ public class Map{
         g.setColor(Color.BLACK);
         g.fillRect(0,0, (int) this.viewWidth, (int)this.viewHeight);
 
-        ArrayList<Chunk> chunksInView = getChunksInView(30);
+        ArrayList<Chunk> chunksInView = getChunksInView(3);
 
         g.setColor(Color.YELLOW);
         g.setStroke(new BasicStroke(3));
