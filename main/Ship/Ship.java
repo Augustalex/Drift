@@ -1,5 +1,6 @@
 package main.Ship;
 
+import main.DebugInfo;
 import main.Movable;
 import main.Ship.Auxiliary.AuxiliarieObject;
 import main.Ship.Auxiliary.Auxiliary;
@@ -11,8 +12,10 @@ import main.Ship.Engine.Tank.Tank;
 import main.Ship.Fuel.Fuel;
 import main.Ship.Interior.Interior;
 import main.Ship.Interior.InteriorObject;
+import main.TextBox;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -44,11 +47,11 @@ import java.awt.image.BufferedImage;
 
 
 public class Ship extends Movable{
-    String name;
-    EngineRoom engineRoom;
-    Cockpit cockpit;
-    Auxiliary auxiliary;
-    Interior interior;
+    private String name;
+    public EngineRoom engineRoom;
+    public Cockpit cockpit;
+    public Auxiliary auxiliary;
+    public Interior interior;
 
     public Ship(String name, String imgPath, int width, int height, int engienRoomCapacity, int cockpitCapacaty, int auxiliaryCapacaty, int interiorCapacaty){
         super(0, 0, width, height);
@@ -87,12 +90,22 @@ public class Ship extends Movable{
     }
 
     @Override
-    public void render(Graphics2D g) {
+    public void render(Graphics2D g){
 
     }
 
     @Override
     public void render(Graphics2D g, double xOffset, double yOffset) {
+        if(this.getImage() != null){
+            AffineTransform backup = g.getTransform();
+            AffineTransform trans = this.getTransformation(xOffset, yOffset);
+            g.transform(trans);
+            g.drawImage(this.getImage(), (int)(this.getX()-xOffset), (int)(this.getY()-yOffset), null);
+            g.setTransform(backup);
+        }
 
+        String info = String.format("[ X:%f, Y:%f ] [ CX:%d, CY:%d ] [ SPEED:%f, ROTATION:%f, ANGLE:%f ]", this.getX(), this.getY(), this.getChunkPosition().x, this.getChunkPosition().y, this.getSpeed(), this.getRotationMomentum(), this.getAngle());
+        DebugInfo.textBoxes.add(new TextBox(info, 50, 50, Color.green));
     }
+
 }

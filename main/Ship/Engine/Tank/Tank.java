@@ -11,9 +11,8 @@ public class Tank extends Hull{
     public int tankSize;
     public int tankCapacity;
 
-    public Tank(Fuel fuelType, int tankCapacity, int hullValue){
+    public Tank(int tankCapacity, int hullValue){
         this.setHullPoints(hullValue);
-        this.fuelType = fuelType;
         this.tankCapacity = tankCapacity;
         this.addFuel(fuelType);
     }

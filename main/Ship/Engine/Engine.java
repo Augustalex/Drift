@@ -76,13 +76,17 @@ public class Engine extends Hull{
     }
 
     public boolean canUseFuel(String name){
-        for(int i = 0; i < avivableFuelTypes.size(); i ++){
-            if(avivableFuelTypes.get(i) == name){
-                return true;
+        if(avivableFuelTypes.size() > 0){
+            for(int i = 0; i < avivableFuelTypes.size(); i ++){
+                if(avivableFuelTypes.get(i) == name){
+                    return true;
+                }
             }
-        }
 
-        return false;
+            return false;
+        }
+        else
+            return false;
     }
 
     public int getEngineSize(){
