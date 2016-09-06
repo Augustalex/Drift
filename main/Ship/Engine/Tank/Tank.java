@@ -25,6 +25,13 @@ public class Tank extends Hull{
         return fuelType.name;
     }
 
+    public double getFuelIndex(){
+        return fuelType.index;
+    }
+    public void setFuelIndex(double value){
+        this.fuelType.index = value;
+    }
+
     public boolean addFuel(Fuel fuel){
         if(this.fuelType.name.equals(fuel.name) && this.fuelType.index < 1.0){
             this.fuelType.index = 1.0;

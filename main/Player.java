@@ -17,7 +17,7 @@ public class Player{
     private String name;
 
     Player(double x, double y){
-        playerShip = shipYard.newShip("Truckmania");
+        playerShip = shipYard.newShip("The Turtle");
         playerShip.setPosition(x, y);
     }
 

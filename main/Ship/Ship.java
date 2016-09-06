@@ -18,6 +18,7 @@ import main.TextBox;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by DAW 28 on 2016-08-10.
@@ -54,11 +55,13 @@ public class Ship extends Movable{
     public Auxiliary auxiliary;
     public Interior interior;
     public String path;
+    public int masInTon
 
-    public Ship(String name, String path, int width, int height, int engienRoomCapacity, int cockpitCapacaty, int auxiliaryCapacaty, int interiorCapacaty){
+    public Ship(String name, String path, int width, int height, int masInTon, int engienRoomCapacity, int cockpitCapacaty, int auxiliaryCapacaty, int interiorCapacaty){
         super(0, 0, width, height);
         this.name = name;
         this.path = path;
+        this.masInTon = masInTon;
         engineRoom = new EngineRoom(engienRoomCapacity);
         cockpit = new Cockpit(cockpitCapacaty);
         auxiliary = new Auxiliary(auxiliaryCapacaty);
@@ -94,6 +97,7 @@ public class Ship extends Movable{
     public int addFuel(Fuel fuel){
         return engineRoom.addFuel(fuel);
     }
+
 
     @Override
     public void render(Graphics2D g){

@@ -7,9 +7,9 @@ import main.Ship.Fuel.Fuel;
 import main.Ship.Ship;
 
 public class TheTurtle extends Ship{
-    //Name, Image Path, Width, Height, EngienRoomCapacity, CockpitCapacaty, AuxiliaryCapacaty, InteriorCapacaty
+    //Name, Image Path, Width, Height, Mass in Ton, EngienRoomCapacity, CockpitCapacaty, AuxiliaryCapacaty, InteriorCapacaty
     public TheTurtle() {
-        super("The Turtle", "../../res/TheTurtle.png", 100, 40, 50, 50, 100, 50);
+        super("The Turtle", "../../res/TheTurtle.png", 100, 40, 22, 50, 50, 100, 50);
 
         CatapillerBoatmotor catapillerBoatmotor = new CatapillerBoatmotor();
         if (!this.addEngineObject(catapillerBoatmotor))
@@ -21,14 +21,5 @@ public class TheTurtle extends Ship{
         Tank tank = new Tank(300, 100, diesel);
         if (!this.addTank(tank))
             System.out.println("ERROR: Can not add a tank to The Turtle");
-
-        int tempFuel = this.addFuel(diesel);
-        if (tempFuel == -3) {
-            System.out.println("ERROR: No tanks in The Turtle");
-        } else if (tempFuel == -2) {
-            System.out.println("ERROR: No tanks with Disel in The Turtle");
-        } else if (tempFuel == -1) {
-            System.out.println("ERROR: Disel tank full in The Turtle");
-        }
     }
 }

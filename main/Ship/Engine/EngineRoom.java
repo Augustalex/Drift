@@ -66,5 +66,10 @@ public class EngineRoom {
         return -2;
     }
 
-
+    public ArrayList<Engine> getEnginesArray(){
+        return engines;
+    }
+    public ArrayList<Tank> getTanksArray(){
+        return tanks;
+    }
 }

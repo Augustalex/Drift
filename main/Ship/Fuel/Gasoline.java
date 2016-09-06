@@ -5,7 +5,7 @@ package main.Ship.Fuel;
  */
 public class Gasoline extends Fuel{
 
-    Gasoline() {
+    public Gasoline() {
         super("Gasoline", 0.6);
     }
 }

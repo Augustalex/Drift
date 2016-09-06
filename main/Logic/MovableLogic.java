@@ -1,6 +1,7 @@
 package main.Logic;
 
 import main.*;
+import main.Ship.Ship;
 
 import javax.xml.soap.Text;
 import java.awt.*;
@@ -11,9 +12,14 @@ import java.awt.geom.Rectangle2D;
  * Created by August on 2016-08-09.
  */
 public class MovableLogic {
+    public ShipLogic shipLogic = new ShipLogic();
 
     public void togglePlayerMotionKey(Player player, char key, boolean toggleOn){
-        switch(key){
+        shipLogic.useFule(player.playerShip);
+
+        shipLogic.useFule(player.playerShip);
+
+        switch (key) {
             case 'w':
                 player.playerShip.isAccelerating = toggleOn;
                 break;
@@ -29,6 +35,7 @@ public class MovableLogic {
                 player.playerShip.isTurningLeft = !toggleOn;
                 break;
         }
+
     }
 
     public void updatePlayerPosition(Player player, Map map, double delta){
